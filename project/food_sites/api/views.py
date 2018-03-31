@@ -12,6 +12,7 @@ class FoodWebsiteView(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     serializer_class = FoodWebsiteSerializer
     queryset = FoodWebsite.objects.all()
     filter_backends = (filters.OrderingFilter, DjangoFilterBackend)
+    permission_classes = ()
     filter_fields = ('product_website__category', )
     ordering_fields = '__all__'
 
