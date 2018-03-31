@@ -149,6 +149,20 @@ services:
     environment:
       C_FORCE_ROOT: 'true'
 
+#  scrapyd:
+#    extends:
+#      file: docker-compose.base.yml
+#      service: scrapyd
+#    links:
+#      - db
+#      - rabbitmq
+#    depends_on:
+#      - rabbitmq
+#      - db
+#    volumes_from:
+#      - volumes_source
+#    env_file: .env.loc
+
   flower:
     extends:
       file: docker-compose.base.yml
