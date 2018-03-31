@@ -29,7 +29,6 @@ class FoodCategorySerializer(serializers.ModelSerializer):
 
 
 class FoodWebsiteSerializer(serializers.ModelSerializer):
-    # products = serializers.SerializerMethodField()
     categories = serializers.SerializerMethodField()
 
     class Meta:
@@ -43,7 +42,7 @@ class FoodWebsiteSerializer(serializers.ModelSerializer):
         for category in categories:
             category['products'] = []
 
-            category['products'] = obj.product_website.filter(category=category['category'])
+            category['products'] = obj.product_website.filter(category=category['category'], is_hidden=False)
             if product_website__category:
                 category['products'] = category['products'].filter(category=product_website__category)
 

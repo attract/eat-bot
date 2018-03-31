@@ -8,7 +8,7 @@ import subprocess
 logger = get_task_logger(__name__)
 
 
-@periodic_task(run_every=(crontab(hour="*/3", minute="0", day_of_week="*")))
+@periodic_task(run_every=(crontab(hour="0,1,3,6", minute="0", day_of_week="*")))
 def foodwebsite_task():
     """
     :return:
@@ -22,7 +22,7 @@ def foodwebsite_task():
 
     logger.info("Task `challenge_finish_task` finished")
 
-#
+
 # @periodic_task(run_every=(crontab(hour="0", minute="10", day_of_week="*")))
 # def init_week_challenge_task():
 #     """
