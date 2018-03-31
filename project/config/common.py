@@ -435,7 +435,7 @@ class Common(Configuration, CeleryConfig):
     # https://github.com/darklow/django-suit/tree/develop/suit/templates
 
     SUIT_CONFIG = {
-        'ADMIN_NAME': 'Pet Rater',
+        'ADMIN_NAME': 'Eat Bot',
         'SEARCH_URL': '',
         'LIST_PER_PAGE': 20,
         'CONFIRM_UNSAVED_CHANGES': False,
