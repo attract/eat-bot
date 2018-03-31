@@ -26,3 +26,7 @@ Start project (localhost)
     http://eatbot.loc/docs/
     - Check home page
     http://eatbot.loc/
+
+
+6. To run scrapy parser
+scrapy crawl food_spider -a id=1 -a do_action=yes

@@ -12,7 +12,7 @@ class DjangoWriterPipeline(object):
     def process_item(self, item, spider):
         if spider.conf['DO_ACTION']:
             try:
-                item['news_website'] = spider.ref_object
+                item['food_website'] = spider.ref_object
 
                 checker_rt = SchedulerRuntime(runtime_type='C')
                 checker_rt.save()
