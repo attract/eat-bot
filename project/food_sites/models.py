@@ -22,6 +22,7 @@ class FoodProduct(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, default='')
     weight = models.CharField(max_length=100, blank=True, default='')
+    category = models.CharField(max_length=255, blank=True, default='')
     image = models.ImageField(verbose_name="Фото", upload_to=settings.IMAGE_PATH, default=None)
     price = models.DecimalField(verbose_name="Цена", decimal_places=2, max_digits=9, default=0)
     food_website = models.ForeignKey(FoodWebsite)
