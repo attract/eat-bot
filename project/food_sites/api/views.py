@@ -13,7 +13,7 @@ class FoodWebsiteView(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     queryset = FoodWebsite.objects.all()
     filter_backends = (filters.OrderingFilter, DjangoFilterBackend)
     permission_classes = ()
-    filter_fields = ('product_website__category', )
+    filter_fields = ('id', 'product_website__category', )
     ordering_fields = '__all__'
 
     def get_queryset(self):
