@@ -168,7 +168,6 @@ class Common(Configuration, CeleryConfig):
                     'django.template.context_processors.static',
                     'django.template.context_processors.tz',
                     'django.contrib.messages.context_processors.messages',
-                    'sekizai.context_processors.sekizai',
                 ],
                 'loaders':[
                     ('django.template.loaders.cached.Loader', [

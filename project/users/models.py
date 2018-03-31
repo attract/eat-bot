@@ -33,7 +33,6 @@ class CustomAbstractUser(AbstractBaseUser, PermissionsMixin):
                                 validators=[validate_name])
     email = models.EmailField(verbose_name='Email', unique=True,
                               error_messages={'unique': EMAIL_DUPLICATE_ERROR})
-    email_new = models.EmailField(verbose_name='Email new', null=True, blank=True)
     is_staff = models.BooleanField(
         verbose_name='Staff',
         default=False,
@@ -41,8 +40,6 @@ class CustomAbstractUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(verbose_name='Activate', default=True,
                                     help_text='Designates whether this user should be treated as '
                                               'active.')
-    is_blocked = models.BooleanField(default=False, verbose_name=_("User is blocked"),
-                                     help_text='Select this instead of deleting accounts.')
     date_joined = models.DateTimeField(verbose_name='Date creation', default=timezone.now)
     photo = ImageField('Photo', upload_to="files/profile", blank=True,
                        help_text='Profile image')
@@ -95,46 +92,6 @@ class User(CustomAbstractUser, gis_models.Model):
     @property
     def username_info(self):
         return self.__str__()
-
-    def unsubscribe(self):
-        """
-        Method should remove user from all email sending
-        :return:
-        """
-        raise NotImplementedError
-
-    @classmethod
-    def get_superusers(cls):
-        return cls.objects.filter(is_superuser=True)
-
-    def generate_verify_code(self):
-        self.verify_code = generate_verify_code()
-        self.save(update_fields=('verify_code',))
-
-    def send_code(self):
-        self.generate_verify_code()
-
-        msg = 'Verify code: {}'.format(self.verify_code)
-        # TODO: Fix or remove
-        # send_sms(phone=self.phone, msg=msg)
-
-    def get_token(self):
-        """
-        method help to receive User token
-        :return: User token
-        """
-        if hasattr(self, 'token') and self.token:
-            return self.token
-
-        token, created = Token.objects.get_or_create(user=self)
-        return token.key
-
-    def get_badge(self):
-        """
-        Method uses for generating values for 'badge' field of IOS devices
-        :return:
-        """
-        return 0
 
     def email_user(self, subject, message, from_email=None, to_email=None, **kwargs):
         """
