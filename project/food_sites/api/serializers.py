@@ -6,5 +6,5 @@ class FoodWebsiteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FoodWebsite
-        exclude = ['point']
-        read_only_fields = ('status', 'owner')
+        fields = '__all__'
+
