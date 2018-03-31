@@ -32,6 +32,7 @@ class FoodProduct(models.Model):
     food_website = models.ForeignKey(FoodWebsite, verbose_name="Сайт", related_name="product_website")
     url = models.URLField()
     checker_runtime = models.ForeignKey(SchedulerRuntime, blank=True, null=True, on_delete=models.SET_NULL)
+    is_hidden = models.BooleanField(default=False, verbose_name='Скрыт')
 
     def __unicode__(self):
         return self.name

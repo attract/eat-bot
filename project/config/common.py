@@ -41,6 +41,7 @@ class Common(Configuration, CeleryConfig):
         'dynamic_scraper',
         'sorl.thumbnail',
         'expander',  # serialize fields expander
+        'djcelery',
 
         # Your apps
         'core',
@@ -111,8 +112,8 @@ class Common(Configuration, CeleryConfig):
 
     APPEND_SLASH = True
     LOCALE_PATHS = [PROJECT_PATH + '/locale']
-    TIME_ZONE = 'America/New_York'
-    LANGUAGE_CODE = 'en'
+    TIME_ZONE = 'Europe/Kiev'
+    LANGUAGE_CODE = 'ru'
 
     TIME_INPUT_FORMATS = ('%I:%M%p',)
 
@@ -268,7 +269,6 @@ class Common(Configuration, CeleryConfig):
         'authentication.backend.AuthBackendBlock',
     )
 
-
     SOCIAL_AUTH_PIPELINE = (
         'social_core.pipeline.user.get_username',
         'social_core.pipeline.user.create_user',
@@ -354,7 +354,8 @@ class Common(Configuration, CeleryConfig):
         'MENU': (
             {'app': 'users', 'label': 'Пользователи', 'icon': 'icon-user', 'permissions': ['users.add_user'], },
             {'app': 'food_sites', 'label': 'Сайты еды', 'icon': 'icon-globe', },
-            {'app': 'dynamic_scraper', 'label': 'Парсер', 'icon': 'icon-globe', },
+            {'app': 'dynamic_scraper', 'label': 'Парсер', 'icon': 'icon-wrench', },
+            {'app': 'djcelery', 'label': 'Планировщик задач', 'icon': 'icon-calendar', },
         )
     }
 

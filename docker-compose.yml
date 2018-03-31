@@ -146,6 +146,8 @@ services:
     volumes_from:
       - volumes_source
     env_file: .env.loc
+    ports:
+      - 6800:6800
     environment:
       C_FORCE_ROOT: 'true'
 

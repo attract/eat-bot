@@ -31,3 +31,5 @@ Start project (localhost)
 6. To run scrapy parser
 scrapy crawl food_spider -a id=1 -a do_action=yes
 scrapy crawl food_spider -a id=2 -a do_action=yes
+
+curl http://127.0.0.1:6800/schedule.json -d project=food_sites -d spider=food_spider

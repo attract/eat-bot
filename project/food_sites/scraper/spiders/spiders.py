@@ -15,6 +15,9 @@ class FoodSpider(DjangoSpider):
         self.scheduler_runtime = self.ref_object.scraper_runtime
         self.scraped_obj_class = FoodProduct
         self.scraped_obj_item_class = FoodProductItem
+
+        # Set all products hiddes
+        self.ref_object.product_website.update(is_hidden=True)
         try:
             super(FoodSpider, self).__init__(self, *args, **kwargs)
         except Exception as ex:
