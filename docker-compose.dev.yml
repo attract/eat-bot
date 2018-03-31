@@ -1,0 +1,143 @@
+version: '2'
+
+services:
+
+  db:
+    extends:
+      file: docker-compose.base.yml
+      service: db
+    env_file: .env.dev
+    volumes:
+      - /home/fileserver/eatbot/db:/var/lib/postgresql/data/pgdata
+    ports:
+      - 5435:5432
+
+  django:
+    extends:
+      file: docker-compose.base.yml
+      service: django
+    container_name: eatbot_django
+    env_file: .env.dev
+    command: /gunicorn.sh
+    volumes_from:
+      - volumes_source
+    depends_on:
+      - db
+      - redis
+    links:
+      - db
+      - redis
+
+  migrations:
+    extends:
+      file: docker-compose.base.yml
+      service: migrations
+    env_file: .env.dev
+    volumes_from:
+      - volumes_source
+    depends_on:
+      - django
+      - db
+      - redis
+    links:
+      - db
+      - redis
+
+  collectstatic:
+    extends:
+      file: docker-compose.base.yml
+      service: collectstatic
+    env_file: .env.dev
+    volumes_from:
+      - volumes_source
+    depends_on:
+      - django
+      - db
+      - redis
+    links:
+      - db
+      - redis
+
+  redis:
+    image: redis:latest
+    container_name: eatbot_redis
+    restart: always
+    network_mode: "bridge"
+    volumes:
+      - /dockerfiles/fileserver/eatbot/redis:/var/lib/redis
+    env_file: .env.dev
+
+  nginx:
+    extends:
+      file: docker-compose.base.yml
+      service: nginx
+    build:
+      args:
+        - project_env=dev
+    env_file: .env.dev
+    environment:
+      - VIRTUAL_HOST=eatbot.python-cd.attractgroup.com
+    volumes:
+      - /home/fileserver/eatbot/nginx:/var/log/nginx
+      - /home/fileserver/eatbot/front/node_modules:/app/front/node_modules
+    volumes_from:
+      - volumes_source
+    depends_on:
+      - django
+    links:
+      - django
+
+
+  rabbitmq:
+    extends:
+      file: docker-compose.base.yml
+      service: rabbitmq
+    env_file: .env.dev
+    ports:
+      - "5673:5672"  # we forward this port because it's useful for debugging
+      - "15673:15672"  # here, we can access rabbitmq management plugin
+
+  celeryworker:
+    extends:
+      file: docker-compose.base.yml
+      service: celeryworker
+    links:
+      - db
+      - rabbitmq
+    depends_on:
+      - rabbitmq
+      - db
+    volumes_from:
+      - volumes_source
+    env_file: .env.dev
+    environment:
+      C_FORCE_ROOT: 'true'
+
+  flower:
+    extends:
+      file: docker-compose.base.yml
+      service: flower
+    environment:
+      - VIRTUAL_HOST=flower.eatbot.python-cd.attractgroup.com
+      - VIRTUAL_PORT=5555
+    links:
+      - rabbitmq
+      - db
+    depends_on:
+      - rabbitmq
+      - celeryworker
+      - db
+    volumes_from:
+      - volumes_source
+    env_file: .env.dev
+
+
+  volumes_source:
+    image: tianon/true
+    volumes:
+      - /home/fileserver/eatbot/media/cache:/app/media/cache
+      - /home/fileserver/eatbot/media/img:/app/media/img # shared folder for django servie
+      - /home/fileserver/eatbot/media/css/front:/app/media/css/front # shared folder for django servie
+      - /home/fileserver/eatbot/media/files:/app/media/files
+      - /home/fileserver/eatbot/media/files/eatbot-thumbnail:/app/media/files/eatbot-thumbnail
+      - /home/fileserver/eatbot/static:/app/static

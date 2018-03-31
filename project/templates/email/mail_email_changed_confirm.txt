@@ -1,0 +1,10 @@
+{% extends 'email/email_base.txt' %}
+{% load i18n %}
+{% autoescape off %}
+{% block content %}
+ You're receiving this email in order to change profile email for your user account at {{ site_name }}.
+{% trans "To confirm current email click on the following link or copy-paste it in your browser:" %}
+
+ {{ protocol }}://{{ domain }}{% url email_confirm_url uidb64=uid token=token %}
+{% endblock %}
+{% endautoescape %}

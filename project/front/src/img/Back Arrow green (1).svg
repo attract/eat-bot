@@ -1,0 +1,14 @@
+<svg width="25" height="16" viewBox="0 0 25 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Back Arrow</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(660 -1166)">
+<g id="Back Arrow">
+<g id="Back">
+<use xlink:href="#path0_fill" transform="matrix(6.12323e-17 -1 1 6.12323e-17 -660.669 1182)" fill="#00BF72"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 14.5787 1.16069C 13.9031 0.512137 12.8361 0.512137 12.1606 1.16069L 0 12.8347L 12.1606 24.5088C 12.8361 25.1573 13.9031 25.1573 14.5787 24.5088C 15.2944 23.8217 15.2944 22.677 14.5787 21.9899L 5.042 12.8347L 14.5787 3.67959C 15.2944 2.99249 15.2944 1.84779 14.5787 1.16069Z"/>
+</defs>
+</svg>

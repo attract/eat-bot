@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+
+        {% if SERVER_TYPE == 'prod'%}
+            <style>{{ css_content|safe }}</style>
+        {% else %}
+            <link rel="stylesheet" href="/media/css/front/app.min.css">
+        {% endif %}
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="shortcut icon" href="/media/img/dsg/favicon.ico">
+        {% if meta.title %}
+            <title>Pet Rater</title>
+        {% else %}
+            <title>Pet Rater</title>
+        {% endif %}
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110379861-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-110379861-1');
+        </script>
+    </head>
+    <body class="content-fluid">
+        {% block wrapper %}
+            <div class="wrapper">
+        {% endblock wrapper %}
+
+            {% block header %}
+            {% endblock header %}
+
+            {% block content %}
+            {% endblock content %}
+        </div>
+        {% block footer %}
+        {% endblock footer %}
+    </body>
+</html>

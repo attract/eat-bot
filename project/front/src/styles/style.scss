@@ -1,0 +1,856 @@
+//@import url('normalize.css');
+@import url('slider.css');
+
+$phone-width: 320px;
+$phoneBig-width: 480px;
+$tablet-width: 768px;
+$desktop-width: 940.69px;
+
+@mixin phone {
+  @media (min-width: #{$phone-width}) and (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+@mixin phoneSmall {
+  @media (min-width: #{$phone-width}) and (max-width: #{$phoneBig-width - 1px}) {
+    @content;
+  }
+}
+@mixin phoneBig {
+  @media (min-width: #{$phoneBig-width}) and (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+@mixin container {
+  @media (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+
+
+$btn-mainColor: rgb(81, 81, 81);
+$btn-mainColor--hover: rgba(81, 81, 81, .5);
+
+$btn-greenColor: rgb(0, 191, 114);
+$btn-greenColor--hover: rgba(0, 191, 114, .5);
+
+
+
+
+
+
+
+
+@font-face {
+  font-family: "ArialRoundedMTBold";
+  src: url("../fonts/ArialRoundedMTBold.eot?") format('embedded-opentype'),
+  url("../fonts/ArialRoundedMTBold.ttf") format('truetype'),
+  url("../fonts/ArialRoundedMTBold.otf") format('opentype'),
+  url("../fonts/ArialRoundedMTBold.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+ul {
+  list-style: none;
+}
+
+body {
+  min-width: 360px;
+  width: 100%;
+  background: #1D1D1D;
+  color: #ffffff;
+  font-family: "ArialRoundedMTBold", Arial, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 940.69px;
+  margin: 0 auto;
+
+  @include container {
+    padding: 0 5px;
+  }
+}
+
+.header {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 58.53px;
+  background: rgba(50, 50, 50, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__item {
+
+    &--link {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  &__logo {
+  }
+  &__link {
+    width: 85px;
+    height: 20px;
+
+    &--ios {
+      margin-right: 92px;
+      background: url("/media/img/icon-appstore(1).svg") center no-repeat;
+      -webkit-background-size: contain;
+      background-size: contain;
+
+      @include phoneSmall {
+        margin-right: 20px;
+        //margin-top: -7px;
+      }
+    }
+    &--google {
+      background: url("/media/img/icon-googleplay(1).svg") center no-repeat;
+      -webkit-background-size: contain;
+      background-size: contain;
+
+      @include phoneSmall {
+        //margin-top: -7px;
+      }
+    }
+  }
+}
+
+.about {
+  position: relative;
+  //width: 1366px;
+  height: 688px;
+  margin-bottom: 62.38px;
+  //padding-top: 130px;
+  //background: url("img/main img.jpg") top center no-repeat;
+  //-webkit-background-size: cover;
+  //background-size: cover;
+
+  @include phoneSmall {
+    margin-bottom: 20px;
+  }
+  @include phone {
+    margin-bottom: 20px;
+  }
+  @include container {
+    height: 100vh;
+  }
+
+  .container {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    margin-left: -470.345px;
+
+    @include container {
+      left: 0;
+      margin: 0;
+    }
+  }
+
+  .main__slider {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__header {
+    //font-family: "ArialRoundedMTBold", Arial, sans-serif;
+    font-size: 84px;
+    color: #ffffff;
+
+    @include phone {
+      font-size: 64px;
+    }
+
+    &--small {
+      margin-top: 37.68px;
+      font-size: 30px;
+      line-height: 46px;
+    }
+    &--green {
+      color: $btn-greenColor;
+    }
+
+  }
+  .peppermint figure {
+    &:nth-of-type(1) {
+      .main__slider-wrapper {
+        background-image: url('/media/img/slider/1.png');
+
+        //@media screen and (max-width: 960px) {
+        //  background-image: url('img/slider/1_768.png');
+        //}
+        //@media screen and (max-width: 767px) {
+        //  background-image: url('img/slider/1_480.png');
+        //}
+        @media screen and (max-width: 960px) {
+          background-image: url('/media/img/slider/1_375(2).jpg');
+        }
+      }
+    }
+    &:nth-of-type(2) {
+      .main__slider-wrapper {
+        background-image: url('/media/img/slider/2.png');
+
+        //@media screen and (max-width: 960px) {
+        //  background-image: url('img/slider/2_768.png');
+        //}
+        //@media screen and (max-width: 767px) {
+        //  background-image: url('img/slider/2_480.png');
+        //}
+        @media screen and (max-width: 960px) {
+          background-image: url('/media/img/slider/2_375(2).jpg');
+        }
+      }
+    }
+    &:nth-of-type(3) {
+      .main__slider-wrapper {
+        background-image: url('/media/img/slider/3.png');
+
+        //@media screen and (max-width: 960px) {
+        //  background-image: url('img/slider/3_768.png');
+        //}
+        //@media screen and (max-width: 767px) {
+        //  background-image: url('img/slider/3_480.png');
+        //}
+        @media screen and (max-width: 960px) {
+          background-image: url('/media/img/slider/3_375(2).jpg');
+        }
+      }
+    }
+  }
+}
+
+.advantages {
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 85px;
+
+    @include phoneSmall {
+      flex-wrap: wrap;
+    }
+    @include phone {
+      flex-wrap: wrap;
+    }
+  }
+  &__screen {
+
+    &--left {
+      width: 377px;
+      height: 462px;
+      background: url("/media/img/screen-pixel-iphone.png") top left no-repeat;
+      -webkit-background-size: contain;
+      background-size: contain;
+
+      @include phoneSmall {
+        //height: 350px;
+      }
+    }
+    &--right {
+      position: relative;
+      right: -10%;
+      width: 531px;
+      height: 581px;
+      background: url("/media/img/Phone.png") top right no-repeat;
+      -webkit-background-size: contain;
+      background-size: contain;
+
+      @include phoneSmall {
+        order: 0;
+        right: 0;
+        height: 400px;
+        background-position: top left;
+      }
+      @include phone {
+        order: 0;
+        right: 0;
+        background-position: top left;
+      }
+      @media screen and (max-width: 1000px) {
+        right: 0;
+      }
+    }
+  }
+  &__text {
+    &--left {
+      width: 515px;
+
+      @include phoneSmall {
+        order: 1;
+      }
+      @include phone {
+        order: 1;
+      }
+    }
+    &--right {
+      margin-left: 15px;
+
+      @include phone {
+        margin: 0;
+      }
+    }
+  }
+  &__header {
+    font-size: 65px;
+    line-height: 84px;
+
+    @include phoneSmall {
+      font-size: 45px;
+      line-height: 54px;
+    }
+    @include phone {
+      font-size: 45px;
+      line-height: 54px;
+    }
+
+    &--green {
+      color: $btn-greenColor;
+    }
+    &--small {
+      line-height: normal;
+      font-size: 30px;
+      margin-top: 30.17px;
+      margin-bottom: 30.79px;
+
+      @include phoneSmall {
+        font-size: 25px;
+        line-height: 25px;
+      }
+      @include phone {
+        font-size: 25px;
+        line-height: 25px;
+      }
+    }
+  }
+  &__categories {
+    margin-top: 31.29px;
+    margin-bottom: 47.97px;
+    font-size: 0;
+  }
+  &__category-item {
+    display: inline-block;
+    vertical-align: top;
+    width: 131.38px;
+    height: 30px;
+    margin-right: 11px;
+    background: url("/media/img/Combined Shape(1).svg") 18.24px center no-repeat, $btn-mainColor;
+    border-radius: 15px;
+    font-size: 13px;
+    line-height: 30px;
+    text-align: center;
+
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover {
+      background: url("/media/img/Combined Shape(1).svg") 10.24px center no-repeat, $btn-mainColor--hover;
+    }
+
+    @include phoneSmall {
+      width: 105px;
+      background-position: 10px center;
+    }
+    @include phone {
+      width: 105px;
+      background-position: 10px center;
+    }
+    @include tablet {
+      width: 115px;
+    }
+  }
+  &__about {
+    margin-bottom: 30px;
+    font-size: 11px;
+    line-height: 21px;
+  }
+  &__download {
+
+  }
+  &__download-item {
+    display: inline-block;
+    vertical-align: top;
+    width: 148.62px;
+    height: 41.46px;
+    padding: 13.27px 38.50px;
+    margin-right: 20px;
+    background: linear-gradient(180deg, #515151 0%, $btn-mainColor 100%);
+    border-radius: 23.65px;
+
+    &--ios {
+      background: url("/media/img/icon-appstore(1).svg") center no-repeat, linear-gradient(180deg, #515151 0%, rgba(81, 81, 81, 0) 100%);
+      -webkit-background-size: 71.63px 14.92px, contain;
+      background-size: 71.63px 14.92px, contain;
+    }
+    &--google {
+      background: url("/media/img/icon-googleplay(1).svg") center no-repeat, linear-gradient(180deg, #515151 0%, rgba(81, 81, 81, 0) 100%);
+      -webkit-background-size: 82.4px 18px, contain;
+      background-size: 82.4px 18px, contain;
+    }
+  }
+}
+
+
+.best {
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    @include phoneSmall {
+      flex-wrap: wrap;
+    }
+    @include phone {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__avatar {
+    @include phoneSmall {
+      margin: auto;
+    }
+    @include phone {
+      margin: auto;
+    }
+  }
+  &__big-wrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    //flex-wrap: wrap;
+    margin-bottom: 44.53px;
+
+    @include phoneSmall {
+      flex-wrap: wrap;
+    }
+    @include phone {
+      flex-wrap: wrap;
+      margin: auto;
+    }
+  }
+  &__info {
+    display: flex;
+    align-content: flex-start;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  &__header {
+    margin-right: 18px;
+    line-height: 84px;
+    font-size: 65px;
+    text-align: center;
+
+    @include phoneSmall {
+      font-size: 50px;
+      line-height: 60px;
+      margin: auto 18px auto auto;
+      text-align: center;
+    }
+    @include phone {
+      font-size: 50px;
+      line-height: 60px;
+      margin: auto 18px auto auto;
+      text-align: center;
+    }
+  }
+  .wrapper {
+    position: relative;
+
+    @include phoneSmall {
+      margin: auto;
+    }
+    @include phone {
+      margin: auto;
+    }
+  }
+  &__display {
+    display: flex;
+    align-items: center;
+    //padding-right: 44px;
+    line-height: 84px;
+    font-size: 65px;
+    color: $btn-greenColor;
+    cursor: pointer;
+    //background: url("img/Back Arrow green (1).svg") 100% 60% no-repeat;
+
+    @include phoneSmall {
+      font-size: 50px;
+      line-height: 60px;
+    }
+    @include phone {
+      font-size: 50px;
+      line-height: 60px;
+    }
+
+    svg {
+      float: right;
+      margin-left: 20px;
+    }
+  }
+  &__select {
+    position: absolute;
+    left: 0;
+    bottom: -235px;
+    display: none;
+    background: #1D1D1D;
+
+    &--show {
+      display: block;
+    }
+
+    @include phoneSmall {
+      bottom: -180px;
+    }
+    @include phone {
+      bottom: -180px;
+    }
+  }
+  &__option {
+    line-height: 84px;
+    font-size: 65px;
+    color: #ffffff;
+    cursor: pointer;
+
+    &:hover {
+      color: $btn-greenColor;
+    }
+
+    @include phoneSmall {
+      font-size: 50px;
+      line-height: 60px;
+    }
+    @include phone {
+      font-size: 50px;
+      line-height: 60px;
+    }
+  }
+  &__periods {
+    font-size: 0;
+
+    @include phoneSmall {
+      margin-bottom: 20px;
+    }
+    @include phone {
+      margin-bottom: 20px;
+    }
+  }
+  &__periods-item {
+    display: inline-block;
+    vertical-align: top;
+    width: 148.06px;
+    height: 44.68px;
+    border-radius: 37.65px;
+    margin-right: 13.76px;
+    font-size: 16px;
+    line-height: 44.68px;
+    text-align: center;
+    background: $btn-mainColor;
+    cursor: pointer;
+
+    &:hover {
+      background: $btn-mainColor--hover;
+    }
+
+    @include phone {
+      width: 108px;
+      height: 35px;
+      line-height: 35px;
+      border-radius: 20px;
+      margin-right: 10px;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+    &--active {
+      background: $btn-greenColor;
+
+      &:hover {
+        background: $btn-greenColor--hover;
+      }
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+
+
+.rating {
+  margin-top: 119.67px;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    @include phoneSmall {
+      flex-wrap: wrap;
+    }
+    @include phone {
+      flex-wrap: wrap;
+
+    }
+  }
+
+  &__header {
+    line-height: 84px;
+    font-size: 65px;
+    margin-bottom: 38.59px;
+
+    &--green {
+      color:$btn-greenColor;
+    }
+
+    @include phoneSmall {
+      margin-bottom: 20px;
+    }
+    @include phone {
+      margin-bottom: 20px;
+    }
+  }
+  &__periods {
+    font-size: 0;
+
+    @include phoneSmall {
+      margin-bottom: 20px;
+    }
+    @include phone {
+      margin-bottom: 20px;
+    }
+  }
+  &__periods-item {
+    display: inline-block;
+    vertical-align: top;
+    width: 99.42px;
+    height: 30px;
+    border-radius: 15px;
+    margin-right: 13.76px;
+    font-size: 13px;
+    line-height: 30px;
+    text-align: center;
+    background: $btn-mainColor;
+    cursor: pointer;
+
+    &:hover {
+      background: $btn-mainColor--hover;
+    }
+
+    &--active {
+      background: $btn-greenColor;
+
+      &:hover {
+        background: $btn-greenColor--hover;
+      }
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &__categories {
+    position: relative;
+
+    @include phoneSmall {
+      margin: auto;
+    }
+  }
+  &__categories-label {
+    line-height: 20px;
+    font-size: 13px;
+  }
+  &__display {
+    width: 299.24px;
+    height: 43px;
+    border-bottom: 1px solid $btn-mainColor;
+    line-height: 22px;
+    font-size: 17px;
+    letter-spacing: -0.0241176em;
+    color: $btn-greenColor;
+    cursor: pointer;
+    //background: url("img/Back Arrow(1).svg") top right no-repeat;
+
+    svg {
+      float: right;
+      fill: rgba(255, 255, 255, 0.5);
+
+      &.rating__display-svg--active {
+        fill: #fff;
+        transform: rotate(180deg);
+      }
+    }
+    &:hover {
+      svg {
+        fill: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+  &__select {
+    position: absolute;
+    left: 0;
+    bottom: -140px;
+    display: none;
+    background: #1D1D1D;
+
+    &--show {
+      display: block;
+    }
+  }
+  &__option {
+    width: 299.24px;
+    height: 43px;
+    line-height: 22px;
+    font-size: 17px;
+    letter-spacing: -0.0241176em;
+    color: #ffffff;
+    cursor: pointer;
+
+    &:hover {
+      color: $btn-greenColor;
+    }
+  }
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 50.23px;
+    font-size: 0;
+
+    @media screen and (min-width: 600px) and (max-width: $desktop-width - 1px) {
+      justify-content: space-around;
+    }
+  }
+  &__item {
+    max-width: 300.13px;
+    //display: inline-block;
+    //vertical-align: top;
+    //margin-right: 19.86px;
+    margin-bottom: 60px;
+
+    @media screen and (max-width: 600px) {
+      margin: auto auto 60px;
+    }
+
+    &--download {
+      @media screen and (min-width: 911px) {
+        max-width: none;
+      }
+    }
+  }
+  &__avatar {
+    width: 28.19px;
+    height: 28.19px;
+    margin-right: 11.64px;
+    background: #D8D8D8;
+    box-shadow: 0 0 8px #356A53;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
+  &__name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    line-height: normal;
+    font-size: 15px;
+    letter-spacing: -0.016em;
+  }
+  &__img {
+    display: block;
+    width: 300.14px;
+    height: 300.14px;
+    left: 212.31px;
+    top: 5503.05px;
+    background: #C4C4C4;
+    border-radius: 4px;
+
+    @media screen and (min-width: 600px) and (max-width: 767px) {
+      width: 280px;
+      height: 280px;
+    }
+  }
+  &__download {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+  &__download-header {
+    width: 100%;
+    line-height: normal;
+    font-size: 30px;
+  }
+  &__download-link {
+    display: block;
+    width: 148.62px;
+    height: 41.46px;
+    margin: 43.79px auto 0;
+    line-height: 41.46px;
+    font-size: 12px;
+    text-align: center;
+    color: #DDDDDD;
+    background: linear-gradient(180deg, #515151 0%, rgba(81, 81, 81, 0) 100%);
+    border-radius: 23.65px;
+    text-decoration: none;
+
+    &:hover {
+      background: linear-gradient(180deg, #3D3D3D 0%, rgba(81, 81, 81, 0) 100%);
+    }
+  }
+}
+
+
+.footer {
+  height: 58.53px;
+  background: url("/media/img/header-bg(1).png"), rgba(50, 50, 50, 0.47);
+  -webkit-background-size: cover;
+  background-size: cover;
+  line-height: normal;
+  font-size: 9px;
+  color: #949494;
+
+  .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  &__logo {
+    margin-right: 29.25px;
+  }
+  &__developer {
+    flex-grow: 1;
+    text-align: right;
+  }
+}

@@ -1,0 +1,15 @@
+{% load utils_tags %}
+{{ food_truck.photo }}
+<div class="file-upload">
+    {% if widget.value %}
+        <a class="big-photo" href="{{ widget.value_full }}" data-lightbox="photo-item" target="_blank">
+            <img src="{% get_thumbnail_src widget.value "160x160" crop="noop" %}" alt="{{ im.name }}">
+        </a>
+    {% endif %}
+    <!--<span class="clearable-file-input">-->
+        <!--<input name="photo-clear" id="photo-clear_id" type="checkbox">-->
+        <!--<label for="photo-clear_id">Clear</label>-->
+    <!--</span>-->
+    <div class="clearfix" style="height: 10px"></div>
+    <input type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value }}"{% endif %}{% include "django/forms/widgets/attrs.html" %} />
+</div>

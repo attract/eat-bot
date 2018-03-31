@@ -1,0 +1,19 @@
+{% load i18n %}{% autoescape off %}
+{% block header%}
+Pet Rater  - {{ SITE_URL }}
+
+{% trans "Dear, " %}{{ user.username }}!
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block footer %}
+Sent by Pet Rater. - {{ SITE_URL }}
+{% endblock %}
+{% endautoescape %}
+
+
+
+
+
+

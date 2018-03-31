@@ -1,0 +1,30 @@
+{% load i18n %}{% autoescape off %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Pet Rater</title>
+
+    {% block js %}{% endblock %}
+
+</head>
+<body style="margin: 0 auto;" >
+<div style="font: 16px Arial, sans-serif; color: #001e1e; padding: 0 0 20px">
+	{% block header%}{% trans "Dear, " %} {{ user.username }}!<br>{% endblock %}
+	<br>
+	{% block content %}{% endblock %}
+
+	{% block footer %}{% endblock %}
+</div>
+</body>
+</html>
+{% endautoescape %}
+
+
+
+
+
+

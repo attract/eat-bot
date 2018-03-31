@@ -1,0 +1,179 @@
+version: '2'
+
+services:
+
+  db:
+    extends:
+      file: docker-compose.base.yml
+      service: db
+    env_file: .env.loc
+    volumes:
+      - /home/fileserver/eatbot/db:/var/lib/postgresql/data/pgdata
+    ports:
+      - 5433:5432
+
+  django-dev:
+    extends:
+      file: docker-compose.base.yml
+      service: django
+    container_name: eatbot_django_dev
+    env_file: .env.loc
+    environment:
+      - VIRTUAL_HOST=eatbot.loc
+      - VIRTUAL_PORT=8000
+    command: python manage.py runserver 0.0.0.0:8000 --insecure
+    volumes_from:
+      - volumes_source
+    depends_on:
+      - db
+      - redis
+    links:
+      - db
+      - redis
+    ports:
+      - 8888:8000
+
+#  django:
+#    extends:
+#      file: docker-compose.base.yml
+#      service: django
+#    container_name: eatbot_django
+#    env_file: .env.loc
+#    command: /gunicorn.sh
+#    volumes_from:
+#      - volumes_source
+#    depends_on:
+#      - db
+#      - redis
+#    links:
+#      - db
+#      - redis
+
+  migrations:
+    extends:
+      file: docker-compose.base.yml
+      service: migrations
+    env_file: .env.loc
+    volumes_from:
+      - volumes_source
+    depends_on:
+      - django-dev
+      - db
+      - redis
+    links:
+      - db
+      - redis
+
+  collectstatic:
+    extends:
+      file: docker-compose.base.yml
+      service: collectstatic
+    env_file: .env.loc
+    volumes_from:
+      - volumes_source
+    depends_on:
+      - django-dev
+      - db
+      - redis
+    links:
+      - db
+      - redis
+
+  nginx:
+    extends:
+      file: docker-compose.base.yml
+      service: nginx
+    build:
+      args:
+        - project_env=loc
+    env_file: .env.loc
+    environment:
+      - VIRTUAL_HOST=nginx.eatbot.loc
+    volumes:
+      - /home/fileserver/eatbot/nginx:/var/log/nginx
+      - /home/fileserver/eatbot/front/node_modules:/app/front/node_modules
+    volumes_from:
+      - volumes_source
+    depends_on:
+      - django-dev
+    links:
+      - django-dev
+
+  redis:
+    image: redis:latest
+    container_name: eatbot_redis
+    restart: always
+    network_mode: "bridge"
+    volumes:
+      - /home/fileserver/eatbot/redis:/var/lib/redis
+    env_file: .env.loc
+
+#  npm:
+#    restart: always
+#    container_name: eatbot_npm
+#    build:
+#      args:
+#        - project_env=loc
+#    extends:
+#      file: docker-compose.base.yml
+#      service: nginx
+#    command: bash -c "npm install && ./node_modules/.bin/gulp"
+#    env_file: .env.loc
+#    volumes_from:
+#      - nginx
+#    depends_on:
+#      - nginx
+
+  rabbitmq:
+    extends:
+      file: docker-compose.base.yml
+      service: rabbitmq
+    env_file: .env.loc
+#    ports:
+#      - "5672:5672"  # we forward this port because it's useful for debugging
+#      - "15672:15672"  # here, we can access rabbitmq management plugin
+
+  celeryworker:
+    extends:
+      file: docker-compose.base.yml
+      service: celeryworker
+    links:
+      - db
+      - rabbitmq
+    depends_on:
+      - rabbitmq
+      - db
+    volumes_from:
+      - volumes_source
+    env_file: .env.loc
+    environment:
+      C_FORCE_ROOT: 'true'
+
+  flower:
+    extends:
+      file: docker-compose.base.yml
+      service: flower
+    environment:
+      - VIRTUAL_HOST=flower.eatbot.loc
+      - VIRTUAL_PORT=5555
+    links:
+      - rabbitmq
+      - db
+    depends_on:
+      - rabbitmq
+      - celeryworker
+      - db
+    volumes_from:
+      - volumes_source
+    env_file: .env.loc
+
+  volumes_source:
+    image: tianon/true
+    volumes:
+      - ./project:/app
+      - /home/fileserver/eatbot/media/cache:/app/media/cache
+      - /home/fileserver/eatbot/media/img:/app/media/img # shared folder for django servie
+      - /home/fileserver/eatbot/media/css/front:/app/media/css/front # shared folder for django servie
+      - /home/fileserver/eatbot/media/files:/app/media/files
+      - /home/fileserver/eatbot/media/files/eatbot-thumbnail:/app/media/files/eatbot-thumbnail
+      - /home/fileserver/eatbot/static:/app/static

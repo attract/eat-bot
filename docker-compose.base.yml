@@ -1,0 +1,66 @@
+version: '2'
+
+services:
+
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile
+    container_name: eatbot_postgres
+    restart: always
+    network_mode: "bridge"
+
+  django:
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    container_name: eatbot_django
+    network_mode: "bridge"
+
+  migrations:
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    command: python manage.py migrate --noinput
+    container_name: eatbot_migrations
+    network_mode: "bridge"
+
+  collectstatic:
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    command: python manage.py collectstatic --noinput
+    container_name: eatbot_collectstatic
+    network_mode: "bridge"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: eatbot_nginx
+    restart: always
+    network_mode: "bridge"
+
+  rabbitmq:
+    container_name: eatbot_rabbitmq
+    image: rabbitmq:3.6.9
+    restart: always
+    network_mode: "bridge"
+
+  celeryworker:
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    container_name: eatbot_celeryworker
+    command: celery -A config worker -l info -B --broker=amqp://guest:guest@rabbitmq:5672// --logfile="/app/logs/celery/%n.log" --maxtasksperchild=2 -c 2
+    restart: always
+    network_mode: "bridge"
+
+  flower:
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    container_name: eatbot_flower
+    command: flower -A config --port=5555 --broker=amqp://guest:guest@rabbitmq:5672//
+    restart: always
+    network_mode: "bridge"
