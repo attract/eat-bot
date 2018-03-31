@@ -269,42 +269,11 @@ class Common(Configuration, CeleryConfig):
         'authentication.backend.AuthBackendBlock',
     )
 
-    # nastya app
-    SOCIAL_AUTH_FACEBOOK_KEY = '207451146479699'
-    SOCIAL_AUTH_FACEBOOK_SECRET = 'dfde54e0b87397e62bca55a07c85f9d6'
-
-    # nastya app
-    SOCIAL_AUTH_TWITTER_KEY = 'HuPOHU5CDuL6oRjL8xFg2JWI5'
-    SOCIAL_AUTH_TWITTER_SECRET = '3QhReCvafDfjrsm4MMhp1MOX1QGNlVTxdq4j5c3BRqmbgpV7dH'
-
-    # nastya app
-    SOCIAL_AUTH_PINTEREST_KEY = '4943004001334477328'
-    SOCIAL_AUTH_PINTEREST_SECRET = '37cc2331cc368e95b3b8c49440a39a550b5949c008e426829712b0ea1ac51ae1'
-
-    FACEBOOK_API_URL = 'https://graph.facebook.com/'
-    FACEBOOK_USER_URL = FACEBOOK_API_URL + '%s/?fields=%s&access_token=%s'
-    FACEBOOK_PROVIDER = 'facebook'
-    TWITTER_API_URL = 'https://api.twitter.com/1.1/account/verify_credentials.json' \
-                      '?include_email=true&skip_status=true'  # &include_entities=false'
-    TWITTER_PROVIDER = 'twitter'
-    PINTEREST_PROVIDER = 'pinterest'
-    PINTEREST_API_URL = 'https://api.pinterest.com/v1/me/?access_token=%s'
-    SOCIAL_PROVIDER = (
-        (FACEBOOK_PROVIDER, 'Facebook'),
-        (TWITTER_PROVIDER, 'Twitter'),
-        (PINTEREST_PROVIDER, 'Pinterest')
-    )
 
     SOCIAL_AUTH_PIPELINE = (
-        'social_core.pipeline.social_auth.social_details',
-        'social_core.pipeline.social_auth.social_uid',
-        'social_core.pipeline.social_auth.social_user',
         'social_core.pipeline.user.get_username',
         'social_core.pipeline.user.create_user',
-        'social_core.pipeline.social_auth.associate_user',
-        'social_core.pipeline.social_auth.load_extra_data',
         'social_core.pipeline.user.user_details',
-        'social_core.pipeline.social_auth.associate_by_email',
     )
     SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'email']
 
@@ -340,62 +309,6 @@ class Common(Configuration, CeleryConfig):
 
     CORS_ORIGIN_ALLOW_ALL = True
     CORS_ALLOW_CREDENTIALS = True
-
-    # PUSH_NOTIFICATIONS_SETTINGS CONFIGURATION
-    PUSH_NOTIFICATIONS_SETTINGS = {
-        # "GCM_API_KEY": os.getenv('GOOGLE_API_KEY'),
-        # "APNS_CERTIFICATE": str(path(os.getenv('APNS_CERTIFICATE_PATH', default=''))),
-        # "APNS_HOST": os.getenv('APNS_HOST', default=''),
-
-        "CONFIG": "push_notifications.conf.AppConfig",
-        "APPLICATIONS": {
-            # "android_sandbox": {
-            #     "PLATFORM": "FCM",
-            #     "API_KEY": os.getenv('GOOGLE_API_KEY'),
-            # },
-            # "android_live": {
-            #     "PLATFORM": "FCM",
-            #     "API_KEY": os.getenv('GOOGLE_API_KEY'),
-            # },
-            "fcm": {
-                "PLATFORM": "FCM",
-                "API_KEY": "AAAArbf5Q1Y:APA91bEhvglWmjIavMftfwQZYhFeqPHq1Cvpd6z0J7y_gEyLxGLvnJ2gLbyzcHRL50ngIUgk2YhbO0KWbQBS0Y_XYgUXWkQfGrJWjtG3bFpFmfbwMt-jt14OYc8gn8KD6EvmNpK79Nht",
-            },
-            # "ios_sandbox": {
-            #     "PLATFORM": "APNS",
-            #     "CERTIFICATE": str(path('media_private/push_apns_certs/apns.p8')),
-            #     # "HOST": 'gateway.sandbox.push.apple.com',
-            #     "USE_SANDBOX": True,
-            #     "TOPIC": 'com.fpoc.ios.app'
-            # },
-            # "ios_live": {
-            #     "PLATFORM": "APNS",
-            #     "CERTIFICATE": str(path('media_private/push_apns_certs/apns.p8')),
-            #     # "HOST": 'gateway.push.apple.com',
-            #     "USE_SANDBOX": True,
-            #     "TOPIC": 'com.fpoc.ios.app'
-            # },
-        }
-    }
-
-    # PUSH notifications
-    PUSH_NOTIFICATIONS_MESSAGES = {
-        'CREATE_PHOTO_COMMENT': {
-            'type': 'CREATE_PHOTO_COMMENT',
-            'title': 'You have a new comment!',
-            'msg': _('Check it out!')
-        },
-        'PHOTO_WINS_COMPETITION': {
-            'type': 'PHOTO_WINS_COMPETITION',
-            'title': 'Congratulations!',
-            'msg': _('Your photo won the competition.')
-        },
-    }
-
-    # SMS
-    TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID', default='')
-    TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN', default='')
-    TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER', default='')
 
     CACHES = {
         'default': {
@@ -441,12 +354,6 @@ class Common(Configuration, CeleryConfig):
         'CONFIRM_UNSAVED_CHANGES': False,
         'MENU': (
             {'app': 'users', 'label': 'Users', 'icon': 'icon-user', 'permissions': ['users.add_user'], },
-            {'app': 'categories', 'label': 'Categories', 'icon': 'icon-th-list', 'permissions': ['category.add_category'], },
-            {'app': 'photos', 'label': 'Photos', 'icon': 'icon-camera', },
-            {'app': 'reports', 'label': 'Reports', 'icon': 'icon-info-sign', },
-            {'app': 'pages', 'label': 'Pages', 'icon': 'icon-list-alt', },
-            {'app': 'ranking', 'label': 'Ranking', 'icon': 'icon-star-empty', },
-            {'app': 'notifications', 'label': 'Notifications', 'icon': 'icon-info-sign', },
         )
     }
 
