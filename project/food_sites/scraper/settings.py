@@ -32,10 +32,10 @@ BOT_NAME = 'food_sites'
 #Setting LOG_STDOUT to True will prevent Celery scheduling to work, 2017-06-06
 #If you know the cause or a fix please report on GitHub
 LOG_STDOUT = False
-LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'DEBUG'
 
 
-SPIDER_MODULES = ['dynamic_scraper.spiders', 'food_sites.scraper', ]
+SPIDER_MODULES = ['dynamic_scraper.spiders', 'food_sites.scraper.spiders', ]
 USER_AGENT = '{b}/{v}'.format(b=BOT_NAME, v='1.0')
 
 ITEM_PIPELINES = {
@@ -54,5 +54,5 @@ IMAGES_THUMBS = {
 DSCRAPER_IMAGES_STORE_FORMAT = 'ALL'
 
 DSCRAPER_LOG_ENABLED = True
-DSCRAPER_LOG_LEVEL = 'ERROR'
+DSCRAPER_LOG_LEVEL = 'DEBUG'
 DSCRAPER_LOG_LIMIT = 5

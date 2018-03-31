@@ -379,11 +379,11 @@ class Common(Configuration, CeleryConfig):
 
     BOT_NAME = 'food_sites'
 
-    SPIDER_MODULES = ['dynamic_scraper.spiders', 'food_sites.scraper', ]
+    # SPIDER_MODULES = ['dynamic_scraper.spiders', 'food_sites.scraper', ]
     USER_AGENT = '%s/%s' % (BOT_NAME, '1.0')
 
     # Scrapy 0.20+
     ITEM_PIPELINES = {
         'dynamic_scraper.pipelines.ValidationPipeline': 400,
-        'products.scraper.pipelines.DjangoWriterPipeline': 800,
+        'food_sites.scraper.pipelines.DjangoWriterPipeline': 800,
     }
