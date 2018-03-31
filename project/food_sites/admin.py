@@ -10,9 +10,9 @@ class FoodWebsiteAdmin(admin.ModelAdmin):
 
 @admin.register(FoodProduct)
 class FoodProductAdmin(admin.ModelAdmin):
-    list_display = ['food_website__name', 'image_url', 'name', 'weight', 'price', ]
-    search_fields = ['name']
-    list_filter = ['food_website']
+    list_display = ['food_website__name', 'image_url', 'name', 'category', 'weight', 'price', ]
+    search_fields = ['name', 'category', ]
+    list_filter = ['food_website', 'category', ]
 
     def food_website__name(self, obj):
         return obj.food_website.name
