@@ -5,14 +5,6 @@ from django.core.management.base import BaseCommand
 
 from config.tasks import init_week_challenge_task, challenge_finish_task
 from core.bl.time_helper import timeit
-from core.bl.utils_helper import prn, analyze
-from notifications.bl.add_user_notif import AddUserNotif
-from notifications.models import Notification
-from photos.models import Photo, PhotoComment
-from ranking.bl.challenge_finish import ChallengeFinish
-from ranking.bl.photo_position import PhotoPosition
-from ranking.models import ChallengePhoto, PhotoComparison, Challenge, ChallengePhotoWinner
-from users.models import User
 
 
 # @analyze

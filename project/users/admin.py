@@ -12,10 +12,8 @@ from .models import User
 class UserAdmin(admin.ModelAdmin):
     ordering = ('email',)
     search_fields = ('email', 'username')
-    list_display = ['email', 'username', 'photo_img', 'is_active',
-                    'is_blocked', 'date_joined', ]
-    fields = ('username', 'email', 'photo', 'is_active', 'is_blocked',
-              'date_joined', 'last_login',)
+    list_display = ['email', 'username', 'photo_img', 'is_active', 'date_joined', ]
+    fields = ('username', 'email', 'photo', 'is_active', 'date_joined', 'last_login',)
     # exclude = ('groups', 'user_permissions', 'email_new', 'password')
     readonly_fields = ('date_joined', 'last_login')
     list_filter = ()

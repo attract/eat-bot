@@ -18,9 +18,6 @@ class UserRequestPermission(permissions.BasePermission):
         return self._check(request, view)
 
     def _check(self, request, view):
-        if request.user.is_authenticated:
-            return not request.user.is_blocked
-
         return True
 
 
@@ -31,4 +28,4 @@ class IsAuthenticatedCore(permissions.BasePermission):
     message = _('User is blocked')
 
     def has_permission(self, request, view):
-        return request.user and request.user.is_authenticated and not request.user.is_blocked
+        return request.user and request.user.is_authenticated

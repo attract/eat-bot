@@ -38,7 +38,7 @@ class Common(Configuration, CeleryConfig):
         'rest_auth',
         'rest_auth.registration',
         'django_filters',
-
+        'dynamic_scraper',
         'sorl.thumbnail',
         'expander',  # serialize fields expander
 
@@ -46,6 +46,7 @@ class Common(Configuration, CeleryConfig):
         'core',
         'authentication',
         'users',
+        'food_sites',
         #'mailer',
     )
 
@@ -168,7 +169,6 @@ class Common(Configuration, CeleryConfig):
                     'django.template.context_processors.static',
                     'django.template.context_processors.tz',
                     'django.contrib.messages.context_processors.messages',
-                    'sekizai.context_processors.sekizai',
                 ],
                 'loaders':[
                     ('django.template.loaders.cached.Loader', [
@@ -352,12 +352,16 @@ class Common(Configuration, CeleryConfig):
         'LIST_PER_PAGE': 20,
         'CONFIRM_UNSAVED_CHANGES': False,
         'MENU': (
-            {'app': 'users', 'label': 'Users', 'icon': 'icon-user', 'permissions': ['users.add_user'], },
+            {'app': 'users', 'label': 'Пользователи', 'icon': 'icon-user', 'permissions': ['users.add_user'], },
+            {'app': 'food_sites', 'label': 'Сайты еды', 'icon': 'icon-globe', },
+            {'app': 'dynamic_scraper', 'label': 'Парсер', 'icon': 'icon-globe', },
         )
     }
 
     FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880
     DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+
+    IMAGE_PATH = 'files/food_sites/images/'
 
     TEMPLATE_DEBUG = False
 
@@ -368,3 +372,18 @@ class Common(Configuration, CeleryConfig):
     THUMBNAIL_DUMMY_SOURCE = '/media/img/no-img.jpg'
     # THUMBNAIL_DUMMY_SOURCE_SMALL = '/media/img/no-img-sm.png'
     THUMBNAIL_URL_TIMEOUT = 2
+
+    # Scrapy settings
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+    # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example_project.settings")  # Changed in DDS v.0.3
+
+    BOT_NAME = 'food_sites'
+
+    # SPIDER_MODULES = ['dynamic_scraper.spiders', 'food_sites.scraper', ]
+    USER_AGENT = '%s/%s' % (BOT_NAME, '1.0')
+
+    # Scrapy 0.20+
+    ITEM_PIPELINES = {
+        'dynamic_scraper.pipelines.ValidationPipeline': 400,
+        'food_sites.scraper.pipelines.DjangoWriterPipeline': 800,
+    }
