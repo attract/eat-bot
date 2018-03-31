@@ -10,10 +10,6 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 #TODO: Fix or remove (new version swagger does not support this)
 # from rest_framework_swagger.compat import strip_tags
-from twilio.rest import TwilioRestClient
-
-from config.common import Common
-from core.bl.utils_helper import prn
 
 
 class EmailNotification:
