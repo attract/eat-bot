@@ -23,7 +23,7 @@ class FoodProductAdmin(admin.ModelAdmin):
         if obj.image == '/api/nofoto.png':
             obj.image = 'https://kushat.com.ua/api/nofoto.png'
             obj.save()
-        return '<img src="%s">' % obj.image
+        return '<img src="%s" width="100">' % obj.image
 
     image_url.short_description = 'Фото'
     image_url.allow_tags = True
