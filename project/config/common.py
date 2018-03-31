@@ -375,11 +375,11 @@ class Common(Configuration, CeleryConfig):
 
     # Scrapy settings
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example_project.settings")  # Changed in DDS v.0.3
+    # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example_project.settings")  # Changed in DDS v.0.3
 
-    BOT_NAME = 'open_news'
+    BOT_NAME = 'food_sites'
 
-    SPIDER_MODULES = ['dynamic_scraper.spiders', 'products.scraper', ]
+    SPIDER_MODULES = ['dynamic_scraper.spiders', 'food_sites.scraper', ]
     USER_AGENT = '%s/%s' % (BOT_NAME, '1.0')
 
     # Scrapy 0.20+
