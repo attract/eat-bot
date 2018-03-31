@@ -10,7 +10,8 @@ class FoodWebsiteAdmin(admin.ModelAdmin):
 
 @admin.register(FoodProduct)
 class FoodProductAdmin(admin.ModelAdmin):
-    list_display = ['food_website__name', 'image_url', 'name', 'category', 'weight', 'price', ]
+    list_display = ['food_website__name', 'image_url', 'name', 'category', 'description_html',
+                    'weight', 'price', ]
     search_fields = ['name', 'category', ]
     list_filter = ['food_website', 'category', ]
 
@@ -27,3 +28,9 @@ class FoodProductAdmin(admin.ModelAdmin):
 
     image_url.short_description = 'Фото'
     image_url.allow_tags = True
+
+    def description_html(self, obj):
+        return obj.description
+
+    description_html.short_description = 'Описание'
+    description_html.allow_tags = True

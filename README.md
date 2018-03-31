@@ -30,3 +30,4 @@ Start project (localhost)
 
 6. To run scrapy parser
 scrapy crawl food_spider -a id=1 -a do_action=yes
+scrapy crawl food_spider -a id=2 -a do_action=yes
