@@ -2,6 +2,8 @@
 from django.conf import settings
 from django.core.files import File
 from django.core.management.base import BaseCommand
+
+from config.tasks import foodwebsite_task
 from core.bl.time_helper import timeit
 
 
@@ -16,16 +18,14 @@ def test_script():
     # ch_photo.save()
 
     # init_week_challenge_task()
+    # kwargs = {}
+    # args = ()
+    # try:
+    #     t.run_spiders(FoodWebsite, 'scraper', 'scraper_runtime', 'food_spider', *args, **kwargs)
+    # except Exception as ex:
+    #     print(ex)
 
-    from dynamic_scraper.utils.task_utils import TaskUtils
-    from food_sites.models import FoodWebsite, FoodProduct
-    t = TaskUtils()
-    kwargs = {}
-    args = ()
-    try:
-        t.run_spiders(FoodWebsite, 'scraper', 'scraper_runtime', 'food_spider', *args, **kwargs)
-    except Exception as ex:
-        print(ex)
+    foodwebsite_task()
 
     # challenge_finish_task()
 

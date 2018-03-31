@@ -56,15 +56,6 @@ services:
     restart: always
     network_mode: "bridge"
 
-  scrapyd:
-    build:
-      context: .
-      dockerfile: ./docker/django/Dockerfile
-    container_name: eatbot_scrapyd
-    command: scrapyd
-    restart: always
-    network_mode: "bridge"
-
   flower:
     build:
       context: .
