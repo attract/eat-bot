@@ -93,9 +93,9 @@ services:
       file: docker-compose.base.yml
       service: rabbitmq
     env_file: .env.dev
-    ports:
-      - "5673:5672"  # we forward this port because it's useful for debugging
-      - "15673:15672"  # here, we can access rabbitmq management plugin
+#    ports:
+#      - "5673:5672"  # we forward this port because it's useful for debugging
+#      - "15673:15672"  # here, we can access rabbitmq management plugin
 
   celeryworker:
     extends:
