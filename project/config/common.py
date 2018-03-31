@@ -3,6 +3,8 @@ from configurations import Configuration, values
 import environ
 from django.utils.translation import ugettext_lazy as _
 
+from config.conf.celery import CeleryConfig
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_PATH = os.path.abspath(os.path.join(os.path.split(__file__)[0], '..'))
 path = lambda *args: os.path.join(PROJECT_PATH, *args)
@@ -11,7 +13,7 @@ environ.Env().read_env()
 env = environ.Env()
 
 
-class Common(Configuration):
+class Common(Configuration, CeleryConfig):
 
     INSTALLED_APPS = (
 
