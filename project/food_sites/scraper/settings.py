@@ -44,7 +44,7 @@ ITEM_PIPELINES = {
     'food_sites.scraper.pipelines.DjangoWriterPipeline': 800,
 }
 
-IMAGES_STORE = os.path.join(PROJECT_ROOT, '../thumbnails')
+IMAGES_STORE = os.path.join(PROJECT_ROOT, '../../media/files/food_sites/images')
 
 IMAGES_THUMBS = {
     'medium': (50, 50),
