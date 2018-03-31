@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/v1/', include(router.urls)),
     url(r'^api/v1/', include('authentication.urls')),
+    url(r'^api/v1/', include('food_sites.api.urls')),
     url(r'^$', HomeView.as_view(), name='home'),
     # url(r'^', include('pages.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
