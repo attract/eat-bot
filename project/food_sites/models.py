@@ -25,7 +25,7 @@ class FoodProduct(models.Model):
     category = models.CharField(max_length=255, blank=True, default='')
     image = models.ImageField(verbose_name="Фото", upload_to=settings.IMAGE_PATH, default=None)
     price = models.DecimalField(verbose_name="Цена", decimal_places=2, max_digits=9, default=0)
-    food_website = models.ForeignKey(FoodWebsite)
+    food_website = models.ForeignKey(FoodWebsite, verbose_name="Сайт", related_name="product_website")
     url = models.URLField()
     checker_runtime = models.ForeignKey(SchedulerRuntime, blank=True, null=True, on_delete=models.SET_NULL)
 
