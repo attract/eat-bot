@@ -1,2 +1,2 @@
 #!/bin/bash
-docker exec -it petrater_django_dev /app/manage.py $@
+docker exec -it eatbot_django_dev /app/manage.py $@

@@ -8,9 +8,8 @@ Start project (localhost)
 
     Add a few lines in file /etc/hosts:
 
-    127.0.0.1 django.petrater.loc
-    127.0.0.1 flower.petrater.loc
-
+    127.0.0.1 eatbot.loc
+    
 3. Start project
 
     console# docker-compose up
@@ -22,8 +21,8 @@ Start project (localhost)
 5. Final test
 
     - Check admin with credentials admin@admin.com / 123123
-    http://petrater.loc/admin/
+    http://eatbot.loc/admin/
     - Check API swagger
-    http://petrater.loc/docs/
+    http://eatbot.loc/docs/
     - Check home page
-    http://petrater.loc/
+    http://eatbot.loc/

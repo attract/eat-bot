@@ -78,7 +78,7 @@ class UserSocialApi(object):
         # TWITTER API to tweet https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update
 
         # TODO PHOTO TEXT, need my account to delete created tweets
-        message = 'Petrater.'
+        message = 'eatbot.'
         api_url = 'https://api.twitter.com/1.1/statuses/update.json?status=%s' % message
         user_social = self.social_accounts[settings.TWITTER_PROVIDER]
         if not user_social:
@@ -106,8 +106,8 @@ class UserSocialApi(object):
 
         # TODO PHOTO TEXT, need to check permission Scope: "write_public"
         # now error is code 3 = Authorization failed.
-        name = 'petrater_name'
-        description = 'petrater_description'
+        name = 'eatbot_name'
+        description = 'eatbot_description'
         token = user_social.get_token()
 
         api_url = 'https://api.pinterest.com/v1/boards/?access_token=%s' % token

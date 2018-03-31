@@ -36,7 +36,7 @@ class Local(Common):
     #         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     #     }
     # }
-    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://petrater_redis:6379'))
+    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://eatbot_redis:6379'))
     CACHES = {
         'default': {
             'BACKEND': 'redis_cache.RedisCache',
