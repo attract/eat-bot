@@ -17,4 +17,4 @@ class FoodWebsiteView(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     ordering_fields = '__all__'
 
     def get_queryset(self):
-        return FoodWebsite.objects.prefetch_related("product_website").all()
+        return FoodWebsite.objects.distinct('id').prefetch_related("product_website")
