@@ -42,7 +42,11 @@ class FoodWebsiteView(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     def get_queryset(self):
         return FoodWebsite.objects.distinct('id').prefetch_related("product_website")
 
-    # def list(self, request, *args, **kwargs):
-    #     queryset = self.get_queryset()
-    #     serializer = self.get_serializer(queryset, many=True)
-    #     return Response(serializer.data)
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+
+        id_website = request.GET.get('id', None)
+        if id_website:
+            queryset = queryset.filter(id=id_website)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
