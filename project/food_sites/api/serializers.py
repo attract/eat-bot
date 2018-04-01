@@ -38,10 +38,10 @@ class FoodWebsiteSerializer(serializers.ModelSerializer):
     def get_categories(self, obj):
         categories = obj.product_website.values('category',).annotate(qnt=Count('category'))
         product_website__category = self.context['request'].GET.get('product_website__category', None)
-
         serializer = None
         #prn(categories)
-        categories = categories.filter(category=product_website__category)
+        if product_website__category:
+            categories = categories.filter(category=product_website__category)
         #prn(categories)
         for category in categories:
             category['products'] = []
