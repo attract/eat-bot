@@ -12,7 +12,6 @@ def product_pre_save_signal(sender, instance=None, created=False, **kwargs):
     instance.is_hidden = False
     # ONLY FOR kushat podano
     if '<table>' in instance.description:
-        prn(instance.description)
         parsed_body = html.fromstring(instance.description)
         all_tr = parsed_body.xpath('.//tr')
         count_all_tr = len(all_tr)
@@ -28,3 +27,5 @@ def product_pre_save_signal(sender, instance=None, created=False, **kwargs):
                 description_fixed += tr_html
 
         instance.description = description_fixed + '</tbody></table>'
+
+    instance.category = instance.category.strip()
